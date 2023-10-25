@@ -238,6 +238,7 @@
 
 <script setup lang="ts">
 import { ref } from '@vue/reactivity';
+import { VNode } from 'vue'
 import { h, computed, onMounted, watch, nextTick } from '@vue/runtime-core'
 import http, { notionHttp } from '../utils/axios'
 import { useRoute, useRouter } from 'vue-router'
