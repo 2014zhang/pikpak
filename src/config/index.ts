@@ -1,10 +1,13 @@
 export const proxy = [
-  'https://api.13pikpak.cf',
-  'https://api.14pikpak.cf',
-  'https://api.15pikpak.cf',
-  'https://api.16pikpak.cf',
-  'https://api.17pikpak.cf',
-  'https://api.18pikpak.cf',
+  'https://diii.tk',
+  'https://api-pikpak.tjsky.cf',
+  'https://api-pikpak.tjsky-1.cf',
+  'https://cf-api.xswd.cf',
+  'https://wkr.btstream.net',
+  'https://pikpak.520936.xyz',
+  'https://wkr.btstream.net',
+  'https://darazemon.xyz',
+  'https://pikpak.995579.xyz',
 ]
 
-export const version = '1.0.0'
+export const version = '1.0.1'
