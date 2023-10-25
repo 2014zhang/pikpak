@@ -402,6 +402,10 @@ import axios from 'axios';
                 case 'batchMove':
                   batchMove([row.id])
                   break
+                ///////////////////////////////////修改 newblank
+                case 'newblank':
+                  window.open(window.location.origin + window.location.pathname+"#list/"+row.id,"_blank");
+                  break
                 case 'down':
                   downFile(row.id)
                   break
@@ -441,6 +445,29 @@ import axios from 'axios';
                   sharePikPakUrl.value = ''
                   showSharePikPak.value = true
                   break
+                ///////////////////////////////////修改 openPotPlayer
+                case 'openPotPlayer':
+                   getFile(row.id)
+                        .then((res:any) => {
+                           if(row.mime_type.indexOf('video') != -1 || row.mime_type.indexOf('audio') != -1) {
+                                  let group : VNode[] = [];
+                                  for (let i = 0; i < res.data.medias.length; i++) {
+                                    group.push(h('div', h('a', {'style':'color: rgb(48, 110, 255)','target':'_blank','href': res.data.name + '###potplayer://###'+res.data.medias[i].link.url,'text':res.data.medias[i].media_name})));
+                                  }
+                                  dialog.info({
+                                      title: '选择对应的清晰度',
+                                      content: () => h('div', group),
+                                      negativeText: '关闭'
+                                    })
+                                  return 
+                            }else{
+                               dialog.info({
+                                      title: '非媒体文件无法用PotPlayer打开',
+                                      negativeText: '关闭'
+                                    })
+                                  return
+                            }
+                        })
                 default:
                   if(key.indexOf('user') !== -1) {
                     const userMenuKey = Number(key.replace('user-', ''))
@@ -1066,6 +1093,11 @@ import axios from 'axios';
         key: 'batchMove',
       },
       {
+        label: '新窗口打开',
+        key: 'newblank',
+        disabled: row.kind !== 'drive#folder'
+      },
+      {
         label: '直接下载',
         key: 'down',
         disabled: row.size <= 0
@@ -1102,6 +1134,11 @@ import axios from 'axios';
       {
         label: '直接分享',
         key: 'sharePikPak',
+        disabled: row.kind === 'drive#folder'
+      },
+      {
+        label: 'PotPlayer打开',
+        key: 'openPotPlayer',
         disabled: row.kind === 'drive#folder'
       },
     ]
